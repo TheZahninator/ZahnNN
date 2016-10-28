@@ -1,26 +1,33 @@
 #pragma once
 
 #include "Neuron.h"
-#include <iostream>
 
-//typedef std::vector<Neuron> Layer;
+namespace ZahnAI{
 
-class NeuralNet
-{
-public:
-	NeuralNet(const std::vector<unsigned int> &topology);
-	~NeuralNet();
+	//typedef std::vector<Neuron> Layer;
 
-	void feedForward(const std::vector<double> &inputVals);
-	void backProp(const std::vector<double> &targetVals);
-	void getResults(std::vector<double> &resultVals);
+	class NeuralNet
+	{
+	public:
+		NeuralNet(const std::vector<unsigned int> &topology);
+		~NeuralNet();
 
-	void setTrainingMode(bool b){ m_isTraining = b; Neuron::setTraining(b); }
+		void feedForward(const std::vector<double> &inputVals);
+		void backProp(const std::vector<double> &targetVals);
+		void getResults(std::vector<double> &resultVals);
 
-private:
-	bool m_isTraining;
-	double m_error;
+		void setTrainingMode(bool b){ m_isTraining = b; Neuron::setTraining(b); }
 
-	std::vector<Layer> m_layers;
+	private:
+		bool m_isTraining;
+		double m_error;
+
+		std::vector<Layer> m_layers;
+	};
+
+}
+
+struct TrainingData{
+	std::vector<double> input;
+	std::vector<double> target;
 };
-
