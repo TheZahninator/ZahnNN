@@ -1,12 +1,11 @@
 #include "pch.h"
 
 #include "NeuralNet.h"
+#include <iostream>
 
-class TrainingData{
-public:
-	std::vector<double> input;
-	std::vector<double> target;
-};
+using namespace ZahnAI;
+
+
 
 int main(){
 	srand((unsigned int) time(nullptr));
@@ -14,9 +13,13 @@ int main(){
 #if 0
 	std::vector<unsigned int> topo({ 3, unsigned(rand() % 20 + 1), unsigned(rand() % 20 + 1), 1 });
 #else
-	std::vector<unsigned int> topo({ 3, 4, 1 });
+	std::vector<unsigned int> topo({ 3, 8, 8, 1 });
 #endif
 	NeuralNet net(topo);
+
+	Neuron::setAlpha(0.25);
+	Neuron::setETA(0.3);
+	unsigned numTrainingSessions = 1000;
 
 	//Training data for an or gate
 	std::vector <TrainingData> trainingData;
@@ -123,9 +126,8 @@ int main(){
 		trainingData.push_back(td);
 	}
 
-	unsigned numTrainingSessions = 10000;
 
-	net.setTrainingMode(true);
+	net.setTrainingMode(false);
 
 	for (unsigned i = 0; i < numTrainingSessions; i++){
 		//std::cout << std::endl << "Pass: " << i << std::endl << std::endl;

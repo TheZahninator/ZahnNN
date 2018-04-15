@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZahnAI", "Neural Network\Neural Network.vcxproj", "{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NeuralNetTest", "NeuralNetTest\NeuralNetTest.vcxproj", "{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|Win32.Build.0 = Debug|Win32
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|Win32.Deploy.0 = Debug|Win32
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Release|Win32.ActiveCfg = Release|Win32
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Release|Win32.Build.0 = Release|Win32
+		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Debug|Win32.Build.0 = Debug|Win32
+		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Release|Win32.ActiveCfg = Release|Win32
+		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
