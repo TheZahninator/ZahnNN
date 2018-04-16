@@ -4,7 +4,6 @@
 namespace ZahnAI{
 
 	double NeuralNet::Default_alpha = 0.1;
-	double NeuralNet::Default_eta = 0.1;
 
 	NeuralNet::NeuralNet(const std::vector<unsigned int> &topology)
 	{
@@ -18,10 +17,8 @@ namespace ZahnAI{
 				Neuron newNeuron(numOutputs, j);
 
 				m_layers[i].push_back(newNeuron);
-				//std::cout << "new neuron" << std::endl;
-
-
 			}
+
 			m_layers[i].back().setOutputVal(1.0);
 			m_layers[i].back().setChanceToActivate(1.0);
 		}
@@ -42,15 +39,8 @@ namespace ZahnAI{
 			}
 		}
 
-		//std::cout << "New neural network with size: ";
-		//for (unsigned i : topology){
-		//	std::cout << i << " ";
-		//}
-		//std::cout << std::endl << std::endl;
-
 		m_isTraining = false;
 
-		m_eta = Default_eta;
 		m_alpha = Default_alpha;
 	}
 
@@ -81,59 +71,13 @@ namespace ZahnAI{
 			Layer &prevLayer = m_layers[i - 1];
 
 			for (unsigned n = 0; n < m_layers[i].size() - int(!isOutputLayer); n++){
-				if (m_layers[i][n].getActive() == false)
+				if (m_layers[i][n].isActive() == false)
 					continue;
 
 				m_layers[i][n].feedForward();
 			}
 		}
 	}
-
-	/*
-	void NeuralNet::backProp(const std::vector<double> &targetVals){
-		//Calculate net error
-		Layer &outputLayer = m_layers.back();
-		m_error = 0.0;
-
-		for (unsigned n = 0; n < targetVals.size(); n++){
-			double delta = targetVals[n] - outputLayer[n].getOutputVal();
-			m_error += delta * delta;
-		}
-		m_error /= outputLayer.size() - 1; //average error squared
-		m_error = sqrt(m_error); //RMS
-
-		//Calculate output layer gradients
-		for (unsigned n = 0; n < targetVals.size() - 1; n++){
-			outputLayer[n].calcOutputGradients(targetVals[n]);
-		}
-
-		//Calculate gradients on hidden layers
-		for (int layer = m_layers.size() - 2; layer >= 0; layer--){
-			Layer &hiddenLayer = m_layers[layer];
-			Layer &nextLayer = m_layers[layer + 1];
-
-			for (unsigned n = 0; n < hiddenLayer.size(); n++){
-				if (hiddenLayer[n].getActive() == false)
-					continue;
-
-				hiddenLayer[n].calcHiddenGradients(nextLayer);
-			}
-		}
-
-		//For all layers from outputs to first hidden layer, update connection weights
-		for (unsigned i = m_layers.size() - 1; i > 0; i--){
-			Layer &layer = m_layers[i];
-			Layer &prevLayer = m_layers[i - 1];
-
-			for (unsigned n = 0; n < layer.size() - 1; n++){
-				if (layer[n].getActive() == false)
-					continue;
-
-				layer[n].updateInputWeights(prevLayer, m_eta, m_alpha);
-			}
-		}
-	}
-	*/
 
 	void NeuralNet::backProp(const std::vector<double> &targetVals){
 		auto &outputLayer = m_layers.back();
@@ -243,7 +187,6 @@ namespace ZahnAI{
 			}
 		}
 
-		child->setETA(m_eta);
 		child->setAlpha(m_alpha);
 
 		return child;
@@ -257,7 +200,6 @@ namespace ZahnAI{
 		}
 
 		NeuralNet* child = new NeuralNet(topo);
-		child->setETA(m_eta);
 		child->setAlpha(m_alpha);
 
 		for (unsigned i = 0; i < m_layers.size(); i++){

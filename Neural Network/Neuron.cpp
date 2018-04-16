@@ -44,10 +44,6 @@ namespace ZahnAI{
 	void* Neuron::DefaultActivationFunctionArgs = {};
 	unsigned Neuron::DefaultActivationFunctionArgc = 0;
 
-
-	double Neuron::eta = 0.01; //Learning rate
-	double Neuron::alpha = 0.025;	//Momentum
-
 	bool Neuron::isTraining = false;
 
 	Neuron::Neuron(unsigned outputs, unsigned index, bool randomActivationFunc)
@@ -130,37 +126,6 @@ namespace ZahnAI{
 		double input = getInputVal();
 
 		m_outputVal = m_activationFunction(input, m_activationArgs, m_activationArgc);
-	}
-
-	double Neuron::transferFunction(double x){
-		return tanh(x);
-	}
-
-	double Neuron::transferFunctionDerivative(double x){
-		return 1.0 - x * x;
-	}
-
-	double Neuron::sumDOW(Layer& nextLayer){
-		double sum = 0.0;
-
-		for (unsigned n = 0; n < nextLayer.size() - 1; n++){
-			if (nextLayer[n].m_isActive == false)
-				continue;
-
-			sum += m_outputWeights[n].weight * nextLayer[n].m_gradient;
-		}
-
-		return sum;
-	}
-
-	void Neuron::calcOutputGradients(double target){
-		double delta = target - m_outputVal;
-		m_gradient = delta * m_activationFunctionDerivative(m_outputVal, m_activationArgs, m_activationArgc);
-	}
-
-	void Neuron::calcHiddenGradients(Layer& nextLayer){
-		double dow = sumDOW(nextLayer);
-		m_gradient = dow * m_activationFunctionDerivative(m_outputVal, m_activationArgs, m_activationArgc);
 	}
 
 	void Neuron::calculateInputDeltaWeights(double alpha){

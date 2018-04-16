@@ -18,11 +18,9 @@ namespace ZahnAI{
 		~Neuron();
 
 		static void setTraining(bool b){ isTraining = b; }
-		static void setAlpha(double a){ alpha = a; } //Set the momentum
-		static void setETA(double e){ eta = e; }	//Set the learning rate
-
 
 		void setChanceToActivate(double d){ m_chanceToActivate = d; }
+
 		void activate(bool randomize){
 			if (randomize){
 				double d = rand() / double(RAND_MAX);
@@ -33,7 +31,7 @@ namespace ZahnAI{
 			}
 		}
 
-		bool getActive(){ return m_isActive; }
+		bool isActive(){ return m_isActive; }
 
 		void setOutputVal(double val){ m_outputVal = val; }
 		double getOutputVal(){
@@ -55,8 +53,6 @@ namespace ZahnAI{
 
 		std::vector<double> getWeightedErrors();
 
-		void calcOutputGradients(double target);
-		void calcHiddenGradients(Layer& nextLayer);
 		void calculateInputDeltaWeights(double alpha);
 		void updateOutputWeights();
 
@@ -73,12 +69,8 @@ namespace ZahnAI{
 
 		unsigned m_index;
 
-		static double eta;
-		static double alpha;
-
 		double m_error;
 
-		double m_gradient;
 		double m_outputVal;
 		std::vector<Connection> m_outputWeights;
 
@@ -86,9 +78,6 @@ namespace ZahnAI{
 		std::shared_ptr<Layer> m_nextLayer;
 
 		static double randomWeight(){ return rand() / double(RAND_MAX) - 0.5; }
-		static double transferFunction(double);
-		static double transferFunctionDerivative(double);
-		double sumDOW(Layer& nextLayer);
 
 		double(*m_activationFunction)(double, void*, unsigned);
 		double(*m_activationFunctionDerivative)(double, void*, unsigned);
@@ -98,8 +87,6 @@ namespace ZahnAI{
 
 	public:
 		void setActivationFunction(double(*func)(double, void*, unsigned), double(*funcDerivative)(double, void*, unsigned), void* args, unsigned argc);
-
-
 
 		static double DefaultStepThreshold;
 

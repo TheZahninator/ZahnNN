@@ -8,7 +8,6 @@ namespace ZahnAI{
 	{
 	public:
 		static double Default_alpha;
-		static double Default_eta;
 
 		NeuralNet(const std::vector<unsigned int> &topology);
 		~NeuralNet();
@@ -21,10 +20,10 @@ namespace ZahnAI{
 		const std::vector<double> predict();
 
 		void setTrainingMode(bool b){ m_isTraining = b; Neuron::setTraining(b); }
-		void setETA(double eta){ m_eta = eta; }
 		void setAlpha(double alpha){ m_alpha = alpha; }
 
 		void mutate(double mutationRate);
+
 		NeuralNet* clone();
 		NeuralNet* crossover(NeuralNet* partner);
 
@@ -33,11 +32,9 @@ namespace ZahnAI{
 
 	private:
 		bool m_isTraining;
-		double m_error;
 
 		std::vector<Layer> m_layers;
 
-		double m_eta;
 		double m_alpha;
 	};
 
