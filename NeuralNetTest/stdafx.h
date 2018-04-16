@@ -15,4 +15,4 @@
 #include <iostream>
 #include <memory>
 
-#include <Neural Network\ZahnAI.h>
+#include <Neural Network\ZahnNN.h>

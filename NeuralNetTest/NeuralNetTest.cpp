@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 
-using namespace ZahnAI;
+using namespace ZahnNN;
 
 void printArr(std::vector<double>& arr){
 	std::cout << "[";
@@ -21,7 +21,7 @@ int main()
 {
 	srand(timeGetTime());
 
-	ZahnAI::NeuralNet::Default_alpha = 0.1;
+	ZahnNN::NeuralNet::Default_alpha = 0.1;
 
 	std::vector<unsigned> topo;
 
@@ -71,7 +71,7 @@ int main()
 		/*for (unsigned j = 0; j < net.getLayerCount(); j++){
 			std::cout << "[";
 			for (unsigned k = 0; k < net.getLayer(j).size(); k++){
-				std::cout << ZahnAI::to_n_decimals(net.getLayer(j)[k].getError(), 3);
+				std::cout << ZahnNN::to_n_decimals(net.getLayer(j)[k].getError(), 3);
 
 				if (k < net.getLayer(j).size() - 1){
 					std::cout << ", ";

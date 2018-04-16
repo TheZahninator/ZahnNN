@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ZahnAI{
+namespace ZahnNN{
 
 	class Neuron;
 

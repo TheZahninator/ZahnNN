@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "NeuralNet.h"
 
-namespace ZahnAI{
+namespace ZahnNN{
 
 	double NeuralNet::Default_alpha = 0.1;
 

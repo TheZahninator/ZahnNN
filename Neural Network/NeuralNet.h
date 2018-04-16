@@ -2,7 +2,7 @@
 
 #include "Neuron.h"
 
-namespace ZahnAI{
+namespace ZahnNN{
 
 	class NeuralNet
 	{

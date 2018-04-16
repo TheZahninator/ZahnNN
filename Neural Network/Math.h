@@ -1,6 +1,6 @@
 #include <math.h>
 
-namespace ZahnAI{
+namespace ZahnNN{
 
 	template <typename T>
 	inline T map(T x, T omin, T omax, T tmin, T tmax){

@@ -35,10 +35,10 @@
     <ClInclude Include="Neuron.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ZahnAI.h">
+    <ClInclude Include="Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Math.h">
+    <ClInclude Include="ZahnNN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

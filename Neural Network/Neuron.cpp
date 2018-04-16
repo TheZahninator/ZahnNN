@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Neuron.h"
 
-namespace ZahnAI{
+namespace ZahnNN{
 
 	double Neuron::DefaultStepThreshold = 0.5;
 
