@@ -43,6 +43,11 @@ namespace ZahnAI{
 			return m_outputVal * m_chanceToActivate;
 		}
 
+		double getInputValNoWeight();
+		double getInputVal();
+
+		double getDerivitiveResult();
+
 		void feedForward();
 
 		void setError(double x){ m_error = x; }
@@ -52,7 +57,8 @@ namespace ZahnAI{
 
 		void calcOutputGradients(double target);
 		void calcHiddenGradients(Layer& nextLayer);
-		void updateInputWeights(Layer& prevLayer, double eta, double alpha);
+		void calculateInputDeltaWeights(double alpha);
+		void updateOutputWeights();
 
 		std::vector<Connection>& getOutputWeights(){ return m_outputWeights; }
 		void setOutputWeights(const std::vector<Connection>& weights){ m_outputWeights = weights; }
@@ -92,6 +98,8 @@ namespace ZahnAI{
 
 	public:
 		void setActivationFunction(double(*func)(double, void*, unsigned), double(*funcDerivative)(double, void*, unsigned), void* args, unsigned argc);
+
+
 
 		static double DefaultStepThreshold;
 

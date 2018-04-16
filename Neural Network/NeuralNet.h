@@ -7,6 +7,9 @@ namespace ZahnAI{
 	class NeuralNet
 	{
 	public:
+		static double Default_alpha;
+		static double Default_eta;
+
 		NeuralNet(const std::vector<unsigned int> &topology);
 		~NeuralNet();
 

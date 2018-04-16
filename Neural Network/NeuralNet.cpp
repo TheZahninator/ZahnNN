@@ -3,6 +3,9 @@
 
 namespace ZahnAI{
 
+	double NeuralNet::Default_alpha = 0.1;
+	double NeuralNet::Default_eta = 0.1;
+
 	NeuralNet::NeuralNet(const std::vector<unsigned int> &topology)
 	{
 		for (unsigned int i = 0; i < topology.size(); i++){
@@ -47,8 +50,8 @@ namespace ZahnAI{
 
 		m_isTraining = false;
 
-		m_eta = 0.1;
-		m_alpha = 0.5;
+		m_eta = Default_eta;
+		m_alpha = Default_alpha;
 	}
 
 
@@ -73,10 +76,11 @@ namespace ZahnAI{
 
 
 		for (unsigned i = 1; i < m_layers.size(); i++){
+			bool isOutputLayer = i == m_layers.size() - 1;
 
 			Layer &prevLayer = m_layers[i - 1];
 
-			for (unsigned n = 0; n < m_layers[i].size() - 1; n++){
+			for (unsigned n = 0; n < m_layers[i].size() - int(!isOutputLayer); n++){
 				if (m_layers[i][n].getActive() == false)
 					continue;
 
@@ -169,8 +173,24 @@ namespace ZahnAI{
 					}
 				}
 			}
+		}
 
-			//Adjust weights
+		//Adjust weights
+		for (unsigned i = 1; i < m_layers.size(); i++){
+			bool isOutputLayer = i == m_layers.size() - 1;
+
+			//std::cout << "Layer [" << i << "]" << std::endl;
+			for (unsigned n = 0; n < m_layers[i].size() - (int)(!isOutputLayer); n++){
+				//std::cout << "Neuron [" << n << "] ";
+				m_layers[i][n].calculateInputDeltaWeights(m_alpha);
+			}
+			//std::cout << std::endl;
+		}
+
+		for (Layer& layer : m_layers){
+			for (Neuron& neuron : layer){
+				neuron.updateOutputWeights();
+			}
 		}
 	}
 
@@ -200,7 +220,7 @@ namespace ZahnAI{
 		for (Layer& layer : m_layers){
 			for (Neuron& neuron : layer){
 				for (Connection& conn : neuron.getOutputWeights()){
-					double delta = ZAHN_MAP((double)rand(), 0.0, (double)RAND_MAX, 0.0, mutationRate);
+					double delta = map((double)rand(), 0.0, (double)RAND_MAX, 0.0, mutationRate);
 					delta *= rand() % 2 == 0 ? -1 : 1;
 					conn.weight += delta;
 				}

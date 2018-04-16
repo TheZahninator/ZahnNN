@@ -38,8 +38,8 @@ namespace ZahnAI{
 	};
 
 
-	double(*Neuron::DefaultActivationFunction)(double, void*, unsigned) = &Neuron::ActivationFastSigmoid;
-	double(*Neuron::DefaultActivationFunctionDerivative)(double, void*, unsigned) = &Neuron::ActivationFastSigmoidDerivative;
+	double(*Neuron::DefaultActivationFunction)(double, void*, unsigned) = &Neuron::ActivationSigmoid;
+	double(*Neuron::DefaultActivationFunctionDerivative)(double, void*, unsigned) = &Neuron::ActivationSigmoidDerivative;
 
 	void* Neuron::DefaultActivationFunctionArgs = {};
 	unsigned Neuron::DefaultActivationFunctionArgc = 0;
@@ -77,13 +77,44 @@ namespace ZahnAI{
 	{
 	}
 
+	double Neuron::getDerivitiveResult(){
+		return m_activationFunctionDerivative(getInputVal(), m_activationArgs, m_activationArgc);
+	}
+
+	double Neuron::getInputValNoWeight(){
+		double result = 0.0;
+
+		for (unsigned i = 0; i < m_previousLayer->size(); i++){
+			if ((*m_previousLayer.get())[i].m_isActive == false)
+				continue;
+
+			result += (*m_previousLayer.get())[i].m_outputVal;
+		}
+
+		return result;
+	}
+
+	double Neuron::getInputVal(){
+		double result = 0.0;
+
+		for (unsigned i = 0; i < m_previousLayer->size(); i++){
+			Neuron& neuron = (*m_previousLayer)[i];
+
+			if (neuron.m_isActive == false) continue;
+
+			result += neuron.getOutputVal() * neuron.getOutputWeights()[m_index].weight;
+		}
+
+		return result;
+	}
+
 	std::vector<double> Neuron::getWeightedErrors(){
 		std::vector<double> result;
 
 		double sumWeight = 0.0;
 
 		for (unsigned i = 0; i < m_previousLayer->size(); i++){
-			sumWeight += (*m_previousLayer.get())[i].getOutputWeights()[m_index].weight;
+			sumWeight += abs((*m_previousLayer.get())[i].getOutputWeights()[m_index].weight);
 		}
 
 		for (unsigned i = 0; i < m_previousLayer->size(); i++){
@@ -96,17 +127,9 @@ namespace ZahnAI{
 	}
 
 	void Neuron::feedForward(){
-		double sum = 0.0;
+		double input = getInputVal();
 
-		for (unsigned i = 0; i < m_previousLayer->size(); i++){
-			if ((*m_previousLayer.get())[i].m_isActive == false)
-				continue;
-
-			sum += (*m_previousLayer.get())[i].m_outputVal *
-				(*m_previousLayer.get())[i].m_outputWeights[m_index].weight;
-		}
-
-		m_outputVal = m_activationFunction(sum, m_activationArgs, m_activationArgc);
+		m_outputVal = m_activationFunction(input, m_activationArgs, m_activationArgc);
 	}
 
 	double Neuron::transferFunction(double x){
@@ -140,21 +163,27 @@ namespace ZahnAI{
 		m_gradient = dow * m_activationFunctionDerivative(m_outputVal, m_activationArgs, m_activationArgc);
 	}
 
-	void Neuron::updateInputWeights(Layer& prevLayer, double eta, double alpha){
-		for (unsigned n = 0; n < prevLayer.size(); n++){
-			Neuron& neuron = prevLayer[n];
+	void Neuron::calculateInputDeltaWeights(double alpha){
+		/*std::cout << "Delta Weights: ";
+		std::cout << "[";*/
+		for (unsigned n = 0; n < m_previousLayer->size(); n++){
+			Neuron& neuron = (*m_previousLayer)[n];
 			if (neuron.m_isActive == false)
 				continue;
 
-			double oldDeltaWeight = neuron.m_outputWeights[m_index].deltaWeight;
+			double delta_w = alpha * m_error * getDerivitiveResult() * neuron.getOutputVal();
+			neuron.m_outputWeights[m_index].deltaWeight = delta_w;
 
-			double newDeltaWeight = eta * neuron.getOutputVal() * m_gradient + alpha * oldDeltaWeight;
-
-			neuron.m_outputWeights[m_index].deltaWeight = newDeltaWeight;
-			neuron.m_outputWeights[m_index].weight += newDeltaWeight;
+			//std::cout << (to_n_decimals(delta_w, 3)) << ", ";
 		}
+		//std::cout << "]" << std::endl;
 	}
 
+	void Neuron::updateOutputWeights(){
+		for (auto& connection : m_outputWeights){
+			connection.weight += connection.deltaWeight;
+		}
+	}
 
 	//Activation functions
 	void Neuron::setActivationFunction(

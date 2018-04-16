@@ -8,7 +8,7 @@ using namespace ZahnAI;
 void printArr(std::vector<double>& arr){
 	std::cout << "[";
 	for (unsigned k = 0; k < arr.size(); k++){
-		std::cout << printf("%.2f", arr[k]);
+		std::cout << arr[k];//to_n_decimals(arr[k], 3);
 
 		if (k < arr.size() - 1){
 			std::cout << ", ";
@@ -19,6 +19,10 @@ void printArr(std::vector<double>& arr){
 
 int main()
 {
+	srand(timeGetTime());
+
+	ZahnAI::NeuralNet::Default_alpha = 0.1;
+
 	std::vector<unsigned> topo;
 
 	topo.push_back(2);
@@ -43,12 +47,13 @@ int main()
 	t_data[3].target = { 0.0 };
 	
 
-	for (unsigned i = 0; i < 4; i++){
+
+	for (unsigned i = 0; i < 100000; i++){
 		unsigned r = rand() % 4;
-		r = i;
 
 
-		std::cout << "Input: ";
+
+		/*std::cout << "Input: ";
 		printArr(t_data[r].input);
 
 		std::cout << "Target: ";
@@ -59,14 +64,14 @@ int main()
 		auto prediction = net.predict();
 		printArr(prediction);
 
-		std::cout << std::endl;
+		std::cout << std::endl;*/
 
 		net.train(t_data[r].input, t_data[r].target);
 
-		for (unsigned j = 0; j < net.getLayerCount(); j++){
+		/*for (unsigned j = 0; j < net.getLayerCount(); j++){
 			std::cout << "[";
 			for (unsigned k = 0; k < net.getLayer(j).size(); k++){
-				std::cout << printf("%.2f", net.getLayer(j)[k].getError());
+				std::cout << ZahnAI::to_n_decimals(net.getLayer(j)[k].getError(), 3);
 
 				if (k < net.getLayer(j).size() - 1){
 					std::cout << ", ";
@@ -75,7 +80,22 @@ int main()
 			std::cout << "]" << std::endl;
 		}
 
-		std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl;*/
+	}
+
+	for (unsigned i = 0; i < 4; i++){
+		std::cout << "Input: ";
+		printArr(t_data[i].input);
+
+		std::cout << "Target: ";
+		printArr(t_data[i].target);
+
+		std::cout << "Prediction: ";
+		net.feedForward(t_data[i].input);
+		auto prediction = net.predict();
+		printArr(prediction);
+
+		std::cout << std::endl;
 	}
 
 	std::cin.ignore();
