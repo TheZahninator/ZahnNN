@@ -53,7 +53,7 @@ namespace ZahnNN{
 
 		std::vector<double> getWeightedErrors();
 
-		void calculateInputDeltaWeights(double alpha);
+		void calculateInputDeltaWeights(double eta, double alpha);
 		void updateOutputWeights();
 
 		std::vector<Connection>& getOutputWeights(){ return m_outputWeights; }

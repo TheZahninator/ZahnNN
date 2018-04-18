@@ -8,6 +8,7 @@ namespace ZahnNN{
 	{
 	public:
 		static double Default_alpha;
+		static double Default_eta;
 
 		NeuralNet(const std::vector<unsigned int> &topology);
 		~NeuralNet();
@@ -20,7 +21,9 @@ namespace ZahnNN{
 		const std::vector<double> predict();
 
 		void setTrainingMode(bool b){ m_isTraining = b; Neuron::setTraining(b); }
+
 		void setAlpha(double alpha){ m_alpha = alpha; }
+		void setEta(double eta){ m_eta = eta; }
 
 		void mutate(double mutationRate);
 
@@ -36,6 +39,7 @@ namespace ZahnNN{
 		std::vector<Layer> m_layers;
 
 		double m_alpha;
+		double m_eta;
 	};
 
 }

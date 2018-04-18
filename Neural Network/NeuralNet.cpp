@@ -3,7 +3,8 @@
 
 namespace ZahnNN{
 
-	double NeuralNet::Default_alpha = 0.1;
+	double NeuralNet::Default_alpha = 0.5;
+	double NeuralNet::Default_eta = 0.1;
 
 	NeuralNet::NeuralNet(const std::vector<unsigned int> &topology)
 	{
@@ -42,6 +43,7 @@ namespace ZahnNN{
 		m_isTraining = false;
 
 		m_alpha = Default_alpha;
+		m_eta = Default_eta;
 	}
 
 
@@ -126,7 +128,7 @@ namespace ZahnNN{
 			//std::cout << "Layer [" << i << "]" << std::endl;
 			for (unsigned n = 0; n < m_layers[i].size() - (int)(!isOutputLayer); n++){
 				//std::cout << "Neuron [" << n << "] ";
-				m_layers[i][n].calculateInputDeltaWeights(m_alpha);
+				m_layers[i][n].calculateInputDeltaWeights(m_eta, m_alpha);
 			}
 			//std::cout << std::endl;
 		}

@@ -128,7 +128,7 @@ namespace ZahnNN{
 		m_outputVal = m_activationFunction(input, m_activationArgs, m_activationArgc);
 	}
 
-	void Neuron::calculateInputDeltaWeights(double alpha){
+	void Neuron::calculateInputDeltaWeights(double eta, double alpha){
 		/*std::cout << "Delta Weights: ";
 		std::cout << "[";*/
 		for (unsigned n = 0; n < m_previousLayer->size(); n++){
@@ -136,7 +136,11 @@ namespace ZahnNN{
 			if (neuron.m_isActive == false)
 				continue;
 
-			double delta_w = alpha * m_error * getDerivitiveResult() * neuron.getOutputVal();
+			double old_delta_w = neuron.m_outputWeights[m_index].deltaWeight;
+
+			double delta_w = eta * m_error * getDerivitiveResult() * neuron.getOutputVal()
+				+ alpha * old_delta_w;
+
 			neuron.m_outputWeights[m_index].deltaWeight = delta_w;
 
 			//std::cout << (to_n_decimals(delta_w, 3)) << ", ";
