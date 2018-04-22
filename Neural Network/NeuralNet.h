@@ -1,6 +1,8 @@
-#pragma once
+#ifndef ZAHNNN_NEURAL_NET_H
+#define ZAHNNN_NEURAL_NET_H
 
 #include "Neuron.h"
+#include "Math.h"
 
 namespace ZahnNN{
 
@@ -48,3 +50,5 @@ struct TrainingData{
 	std::vector<double> input;
 	std::vector<double> target;
 };
+
+#endif

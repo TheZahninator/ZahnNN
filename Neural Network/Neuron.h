@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZAHNNN_NEURON_H
+#define ZAHNNN_NEURON_H
 
 namespace ZahnNN{
 
@@ -122,3 +123,5 @@ namespace ZahnNN{
 		static unsigned DefaultActivationFunctionArgc;
 	};
 }
+
+#endif

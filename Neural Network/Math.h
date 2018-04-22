@@ -1,4 +1,5 @@
-#include <math.h>
+#ifndef ZAHNNN_MATH_H
+#define ZAHNNN_MATH_H
 
 namespace ZahnNN{
 
@@ -12,3 +13,5 @@ namespace ZahnNN{
 	}
 
 }
+
+#endif

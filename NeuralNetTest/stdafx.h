@@ -11,8 +11,6 @@
 #include <stdio.h>
 #include <tchar.h>
 
-#include <vector>
 #include <iostream>
-#include <memory>
 
 #include <Neural Network\ZahnNN.h>
