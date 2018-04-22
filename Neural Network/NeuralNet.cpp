@@ -52,7 +52,9 @@ namespace ZahnNN{
 	}
 
 	void NeuralNet::feedForward(const std::vector<double> &inputVals){
-		assert(inputVals.size() == m_layers[0].size() - 1);
+		if (!(inputVals.size() == m_layers.front().size() - 1)) {
+			throw std::invalid_argument("Wrong amount of input values");
+		}
 
 		//Deactivate random neurons in the hidden layers
 		for (unsigned i = 1; i < m_layers.size() - 1; i++){
@@ -85,7 +87,9 @@ namespace ZahnNN{
 		auto &outputLayer = m_layers.back();
 		auto outputVals = predict();
 
-		assert(targetVals.size() == outputLayer.size());
+		if (!(targetVals.size() == outputVals.size())) {
+			throw std::invalid_argument("Wrong amount of target values");
+		}
 		
 		std::vector<double> errors;
 

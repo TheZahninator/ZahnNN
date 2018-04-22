@@ -81,10 +81,10 @@ namespace ZahnNN{
 		double result = 0.0;
 
 		for (unsigned i = 0; i < m_previousLayer->size(); i++){
-			if ((*m_previousLayer.get())[i].m_isActive == false)
+			if ((*m_previousLayer)[i].m_isActive == false)
 				continue;
 
-			result += (*m_previousLayer.get())[i].m_outputVal;
+			result += (*m_previousLayer)[i].m_outputVal;
 		}
 
 		return result;
@@ -110,12 +110,12 @@ namespace ZahnNN{
 		double sumWeight = 0.0;
 
 		for (unsigned i = 0; i < m_previousLayer->size(); i++){
-			sumWeight += abs((*m_previousLayer.get())[i].getOutputWeights()[m_index].weight);
+			sumWeight += abs((*m_previousLayer)[i].getOutputWeights()[m_index].weight);
 		}
 
 		for (unsigned i = 0; i < m_previousLayer->size(); i++){
 			result.push_back(
-				(*m_previousLayer.get())[i].getOutputWeights()[m_index].weight / sumWeight * m_error
+				(*m_previousLayer)[i].getOutputWeights()[m_index].weight / sumWeight * m_error
 			);
 		}
 

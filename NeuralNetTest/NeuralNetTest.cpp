@@ -68,7 +68,6 @@ int main()
 
 	std::cin.ignore();
 
-	exit(0);
 	return 0;
 }
 

@@ -1,29 +1,48 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZahnAI", "Neural Network\Neural Network.vcxproj", "{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZahnNN", "Neural Network\Neural Network.vcxproj", "{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NeuralNetTest", "NeuralNetTest\NeuralNetTest.vcxproj", "{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZahnNNTest", "ZahnNNTest\ZahnNNTest.vcxproj", "{60181852-0934-42ED-A47B-D0A11CAC7837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|Win32.Build.0 = Debug|Win32
 		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|Win32.Deploy.0 = Debug|Win32
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Debug|x64.ActiveCfg = Debug|Win32
 		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Release|Win32.ActiveCfg = Release|Win32
 		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Release|Win32.Build.0 = Release|Win32
+		{4833F132-4ACD-4C7A-BC4D-48DCD1665F1D}.Release|x64.ActiveCfg = Release|Win32
 		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Debug|Win32.Build.0 = Debug|Win32
+		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Debug|x64.ActiveCfg = Debug|Win32
 		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Release|Win32.ActiveCfg = Release|Win32
 		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Release|Win32.Build.0 = Release|Win32
+		{3682A43D-50E4-41DB-A10E-EBF99D3BDF9E}.Release|x64.ActiveCfg = Release|Win32
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Debug|Win32.ActiveCfg = Debug|Win32
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Debug|Win32.Build.0 = Debug|Win32
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Debug|x64.ActiveCfg = Debug|x64
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Debug|x64.Build.0 = Debug|x64
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Release|Win32.ActiveCfg = Release|Win32
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Release|Win32.Build.0 = Release|Win32
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Release|x64.ActiveCfg = Release|x64
+		{60181852-0934-42ED-A47B-D0A11CAC7837}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9801EF3F-1EC4-4E24-8A37-4D42683A2745}
 	EndGlobalSection
 EndGlobal

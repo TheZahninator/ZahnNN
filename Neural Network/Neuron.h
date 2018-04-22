@@ -60,8 +60,8 @@ namespace ZahnNN{
 		std::vector<Connection>& getOutputWeights(){ return m_outputWeights; }
 		void setOutputWeights(const std::vector<Connection>& weights){ m_outputWeights = weights; }
 
-		void setPrevLayer(Layer* prev){ m_previousLayer.reset(prev); }
-		void setNextLayer(Layer* next){ m_nextLayer.reset(next); }
+		void setPrevLayer(Layer* prev){ m_previousLayer = prev; }
+		void setNextLayer(Layer* next){ m_nextLayer = next; }
 
 	private:
 		bool m_isActive;
@@ -75,8 +75,8 @@ namespace ZahnNN{
 		double m_outputVal;
 		std::vector<Connection> m_outputWeights;
 
-		std::shared_ptr<Layer> m_previousLayer;
-		std::shared_ptr<Layer> m_nextLayer;
+		Layer* m_previousLayer;
+		Layer* m_nextLayer;
 
 		static double randomWeight(){ return rand() / double(RAND_MAX) - 0.5; }
 
