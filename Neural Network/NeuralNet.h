@@ -35,8 +35,12 @@ namespace ZahnNN{
 		unsigned getLayerCount(){ return m_layers.size(); }
 		Layer& getLayer(unsigned x){ return m_layers[x]; }
 
+		const std::vector<unsigned>& getTopology() { return m_topology; }
+
 	private:
 		bool m_isTraining;
+
+		std::vector<unsigned> m_topology;
 
 		std::vector<Layer> m_layers;
 

@@ -88,5 +88,10 @@ namespace ZahnNNTest
 
 			Assert::IsTrue(exceptionThrown);
 		}
+
+		TEST_METHOD(it_can_crossover)
+		{
+			m_net->crossover(m_net.get());
+		}
 	};
 }

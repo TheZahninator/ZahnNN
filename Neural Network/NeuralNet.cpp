@@ -6,7 +6,7 @@ namespace ZahnNN{
 	double NeuralNet::Default_alpha = 0.5;
 	double NeuralNet::Default_eta = 0.1;
 
-	NeuralNet::NeuralNet(const std::vector<unsigned int> &topology)
+	NeuralNet::NeuralNet(const std::vector<unsigned int> &topology) : m_topology(topology)
 	{
 		for (unsigned int i = 0; i < topology.size(); i++){
 			m_layers.push_back(Layer());
@@ -199,11 +199,7 @@ namespace ZahnNN{
 	}
 
 	NeuralNet* NeuralNet::crossover(NeuralNet* partner){
-		std::vector<unsigned> topo;
-
-		for (unsigned i = 0; i < m_layers.size(); i++){
-			topo.push_back(m_layers[i].size() - 1);
-		}
+		std::vector<unsigned> topo = m_topology;
 
 		NeuralNet* child = new NeuralNet(topo);
 		child->setAlpha(m_alpha);

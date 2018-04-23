@@ -24,12 +24,15 @@ int main()
 	std::vector<unsigned> topo;
 
 	topo.push_back(2);
-	topo.push_back(3);
-	topo.push_back(3);
-	topo.push_back(3);
+	topo.push_back(4);
 	topo.push_back(1);
 
+	Neuron::DefaultActivationFunction = &Neuron::ActivationFastSigmoid;
+	Neuron::DefaultActivationFunctionDerivative = &Neuron::ActivationFastSigmoidDerivative;
+
 	NeuralNet net(topo);
+
+	auto& outputLayer = net.getLayer(net.getLayerCount() - 1);
 
 	TrainingData t_data[4];
 
@@ -45,7 +48,7 @@ int main()
 	t_data[3].input = { 1.0, 1.0 };
 	t_data[3].target = { 0.0 };
 	
-	for (unsigned i = 0; i < 10000; i++){
+	for (unsigned i = 0; i < 1000000; i++){
 		unsigned r = rand() % 4;
 
 		net.train(t_data[r].input, t_data[r].target);

@@ -219,12 +219,15 @@ namespace ZahnNN{
 	{
 		assert(argc == 0);
 
-		return abs(x) / (1.0 + abs(x));
+		return x / (1.0 + abs(x));
 	}
 #
 	double Neuron::ActivationFastSigmoidDerivative(double x, void* args, unsigned argc)
 	{
-		return ActivationSigmoidDerivative(x, args, argc);
+		assert(argc == 0);
+
+		//return (1.0 / (abs(x) + 1.0)) - (pow(x, 2) / (abs(x) * pow(abs(x) + 1.0, 2)));
+		return 1.0 / pow(abs(x) + 1.0, 2);
 	}
 
 	double Neuron::ActivationReLu(double x, void* args, unsigned argc)
